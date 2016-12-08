@@ -58,6 +58,14 @@ $scope.filterBooks = function() {
   );
 };
 
+$scope.destroyBook = function(book, index) {
+   Book.delete(book,
+     function(response, _headers) {
+       $scope.books.splice(index, 1);
+     }
+   );
+ };
+
   // checks if all inputs have been filled, if not it returns false.
     valid = function() {
       return !!$scope.book &&

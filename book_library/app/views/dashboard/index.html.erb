@@ -28,7 +28,10 @@
       </table>
     </div>
 
+
     <div class="col-md-8">
+      <label>*******</label><br>
+      <label>Add a new book:</label>
         <form class="form-inline" ng-submit="addBook()">
           <div class="form-group">
             <input type="text" class="form-control" name="Title" placeholder="Title" ng-model="book.title" />
@@ -80,6 +83,7 @@
               </td>
               <td>
                   <button ng-click="editBook(book)" class="btn btn-primary btn-xs">Edit</button>
+                  <button ng-click="destroyBook(book, $index)" class="btn btn-danger btn-xs">Delete</button>
               </td>
     </script>
 

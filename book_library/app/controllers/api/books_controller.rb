@@ -1,7 +1,7 @@
 module Api
   class BooksController < ApplicationController
     respond_to :json
-    before_action :set_book, only: [:update]
+    before_action :set_book, only: [:update, :destroy]
 
     def index
       respond_with Book.all
@@ -14,6 +14,11 @@ module Api
         else
           render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
         end
+    end
+
+    def destroy
+      @book.destroy
+      head :ok
     end
 
     def search

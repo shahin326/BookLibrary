@@ -10,6 +10,14 @@ app.factory('Book', ['$resource', function($resource) {
       params: {
         query: '@query'
       }
+    },
+    delete: {
+      action: 'destroy',
+      method: 'DELETE',
+      url: '/api/books/:id.json',
+      params: {
+        id: '@id'
+      }
     }
   });
 }]);
