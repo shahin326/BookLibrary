@@ -19,7 +19,13 @@ $scope.addBook = function() {
     $scope.book = {};
 };
 
-
+$scope.filterBooks = function() {
+  Book.search({query: $scope.search},
+    function(response, _headers) {
+      $scope.books = response;
+    }
+  );
+};
 
   // checks if all inputs have been filled, if not it returns false.
     valid = function() {
