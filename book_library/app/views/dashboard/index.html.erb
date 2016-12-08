@@ -3,7 +3,7 @@
     <h1>Eficode Book Library</h1>
     <p>by Shahin Safari</p>
   </div>
-  <div class="row" ng-controller="BooksCtrl">
+  <div ng-controller="BooksCtrl">
 
     <div class="row">
       <div class="col-md-4">
@@ -13,21 +13,17 @@
 
     <div class="col-md-12">
       <table class="table table-striped">
-        <thead>
-          <tr>
-            <th class="col-md-3">Title</th>
-            <th class="col-md-2">Author</th>
-            <th class="col-md-3">Description</th>
-            <th class="col-md-4">reserved</th>
-          </tr>
-        </thead>
+          <thead>
+                  <tr>
+                  <th class="col-md-2">Title</th>
+                  <th class="col-md-2">Author</th>
+                  <th class="col-md-3">Description</th>
+                  <th class="col-md-3">Reserved</th>
+                  <th class="col-md-2">Actions</th>
+                </tr>
+          </thead>
         <tbody>
-          <tr ng-repeat="book in books">
-            <td>{{book.title}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.description}}</td>
-            <td>{{book.reserved}}</td>
-          </tr>
+            <tr ng-repeat="book in books" ng-include="toggleForm(book)"></tr>
         </tbody>
       </table>
     </div>
@@ -49,6 +45,45 @@
           <button type="submit" class="btn btn-primary">Add</button>
         </form>
       </div>
+
+      <script type="text/ng-template" id="form">
+              <td>
+                <input ng-model="editing.title" type="text" class="form-control" name="title" />
+              </td>
+              <td>
+                <input ng-model="editing.author" type="text" class="form-control" name="author" />
+              </td>
+              <td>
+                <input ng-model="editing.description" type="text" class="form-control" name="description" />
+              </td>
+              <td>
+                <input ng-model="editing.reserved" type="text" class="form-control" name="reserved" />
+              </td>
+              <td>
+                <button ng-click="hideForm()" class="btn btn-default btn-xs">Cancel</button>
+                <button ng-click="updateBook($index)" class="btn btn-success btn-xs">Save</button>
+              </td>
+    </script>
+
+    <script type="text/ng-template" id="row">
+              <td>
+                <span>{{book.title}}</span>
+              </td>
+              <td>
+                <span>{{book.author}}</span>
+              </td>
+              <td>
+                <span>{{book.description}}</span>
+              </td>
+              <td>
+                <span>{{book.reserved}}</span>
+              </td>
+              <td>
+                  <button ng-click="editBook(book)" class="btn btn-primary btn-xs">Edit</button>
+              </td>
+    </script>
+
+
+
     </div>
-  </div>
 </div>

@@ -3,6 +3,37 @@ var app = angular.module('BookLibrary');
 app.controller('BooksCtrl', ['$scope', 'Book', function($scope, Book) {
   $scope.books = Book.query();
 
+  $scope.editing = {};
+
+
+$scope.toggleForm = function(book) {
+      if (book.id === $scope.editing.id) {
+        return 'form';
+      }
+      else {
+        return 'row';
+      }
+};
+
+$scope.editBook = function(book) {
+  $scope.editing = angular.copy(book);
+};
+
+$scope.updateBook = function(index) {
+  Book.update($scope.editing,
+    function(response, _headers) {
+      $scope.books[index] = angular.copy($scope.editing);
+      $scope.hideForm();
+    },
+    function(response) {
+      alert('Errors: ' + reponse.data.errors.join('. '));
+    }
+  );
+};
+
+$scope.hideForm = function() {
+    $scope.editing = {};
+};
 
 $scope.addBook = function() {
     if (!valid()) { return false; }
